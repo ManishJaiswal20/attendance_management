@@ -9,12 +9,8 @@
 <head>
 <title>User</title>
 <meta charset="UTF-8">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+<%@include file="includes/head.jsp" %>
+<%@include file="includes/foot.jsp" %>
 <style>
 #main-table{
 border: 4px solid rgb(0, 0, 0);
@@ -28,7 +24,15 @@ margin: 20px 40px;
 </head>
 
 <body>
+<% 
 
+String su=(String)session.getAttribute("usern");
+if(su==null)
+{
+	response.sendRedirect("index.jsp");
+}
+
+%>
 <%
 
 response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
@@ -72,7 +76,7 @@ response.setHeader("Expires","0");
     
     </ul>
     
-    <button class="btn btn-warning my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#edit">EDIT CREDENTIALS</button>&nbsp&nbsp
+    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" data-toggle="modal" data-target="#edit">EDIT CREDENTIALS</button>&nbsp&nbsp
     
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -111,7 +115,7 @@ response.setHeader("Expires","0");
     
     <ul class="navbar-nav my-2 my-lg-0">
     <li class="nav-item">
-        <a class="nav-link" href="ulogout.jsp"><button type="submit" class="btn btn-danger">Logout</button></a>
+        <a class="nav-link" href="ulogout.jsp"><button type="submit" class="btn btn-outline-danger">Logout</button></a>
       </li>
     </ul>
   </div>
@@ -129,13 +133,13 @@ response.setHeader("Expires","0");
 				<input type="text" name="ausername" placeholder="Userame" required>
 				<br><br>
 				<label>*Enter Date:</label>
-				<input type="text" name="adate" placeholder="(year-month-day)" required>
+				<input type="date" name="adate" placeholder="(year-month-day)" required>
 				<br><br>
 				<label>*Enter IN time:</label>
-				<input type="text" name="aintime" placeholder="(hour:min)" required>
+				<input type="time" name="aintime" placeholder="(hour:min)" required>
 				<br><br>
 				<label>*Enter OUT time:</label>
-				<input type="text" name="aouttime" placeholder="(hour:min)" required>
+				<input type="time" name="aouttime" placeholder="(hour:min)" required>
 				<br><br>
 				<input type="submit">
 			</form>

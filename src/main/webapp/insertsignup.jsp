@@ -31,14 +31,12 @@ PreparedStatement psmt=conn.prepareStatement(q);
 int row=psmt.executeUpdate();
 
 if(row>0){
-	out.println("your account is successfully created");
+	out.println("<script>alert('Account Successfully Created');window.location.href='index.jsp';</script>");
 }
 else{
 	out.println("wrong");
 }
 %>
-<br>
-<a href="index.jsp"><button>LOGIN</button></a>
 
 </body>
 </html>

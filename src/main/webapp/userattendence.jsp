@@ -29,10 +29,10 @@ PreparedStatement psmt=conn.prepareStatement(q);
 int row=psmt.executeUpdate();
 
 if(row>0){
-	out.println("SUCCESS ENTERED");
+	out.println("<script>alert('SUCCESS ENTERED');window.location.href='user.jsp';</script>");
 }
 else{
-	out.println("wrong");
+	out.println("<script>alert('WRONG');window.location.href='user.jsp';</script>");
 }
 %>
 

@@ -34,6 +34,8 @@ PreparedStatement psmt1=conn.prepareStatement(q1);
 
 int row=psmt.executeUpdate();
 psmt1.executeUpdate();
+session.invalidate();
+response.sendRedirect("index.jsp");
 %>
 
 </body>

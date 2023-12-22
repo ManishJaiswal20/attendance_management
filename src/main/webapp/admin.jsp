@@ -8,14 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin</title>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+<%@include file="includes/head.jsp" %>
+<%@include file="includes/foot.jsp" %>
 </head>
 <body>
+<% 
+
+String su=(String)session.getAttribute("usern");
+if(su==null)
+{
+	response.sendRedirect("index.jsp");
+}
+
+%>
 
 <%
 
@@ -40,7 +45,6 @@ response.setHeader("Expires","0");
     		String us=rs.getString("username");	
     	
     	%>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a href="#"><img alt="aaa" src="images/men.png" height="50px" width="50px"></a>&nbsp&nbsp
   
@@ -76,21 +80,40 @@ response.setHeader("Expires","0");
 
 <h3 class="text-center">AVAILABLE USERS</h3>
 
-<ul class="list-group">
-<li class="list-group-item active h4">
-	<%
-	String q1="select username,contact from details";
+
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Sr.no</th>
+      <th scope="col">User Name</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%
+	String q1="select id,username,contact,email,role,status from details";
 	PreparedStatement ps1=conn.prepareStatement(q1);
 	ResultSet as=ps1.executeQuery();
 	while(as.next())
-	{
-		out.println("Username : "+as.getString("username")+" <br>Contact : "+as.getString("contact")+"<br><br>");
+	{ %>
+		
+		<tr>
+		<th scope="row"><% out.println(as.getString("id"));%></th>
+		<td><% out.println(as.getString("username"));%></td>
+		<td><% out.println(as.getString("contact"));%></td>
+		<td><% out.println(as.getString("email"));%></td>
+		<td><% out.println(as.getString("role"));%></td>
+		<td><% out.println(as.getString("status"));%></td>
+		</tr> 
+		
+	<%
 	}
 	%>
-</li>
-</ul>
-
-
+  </tbody>
+</table>
 
 </body>
 </html>
